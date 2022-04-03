@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  neo4j:
+    build:
+      context: ./router-service/data
+      dockerfile: Dockerfile
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./router-service/data/volumes/import:/var/lib/neo4j/import
+      - ./router-service/data/volumes/logs:/logs
+      - ./router-service/data/volumes/plugins:/plugins
+      - ./router-service/data/volumes/data:/data
+    environment:
+      NEO4J_AUTH: none
+      NEO4JLABS_PLUGINS: '["apoc"]'
