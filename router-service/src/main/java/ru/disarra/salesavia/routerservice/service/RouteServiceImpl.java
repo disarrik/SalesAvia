@@ -10,6 +10,7 @@ import ru.disarra.salesavia.routerservice.dto.AirportDTO;
 import ru.disarra.salesavia.routerservice.dto.RouteDTO;
 import ru.disarra.salesavia.routerservice.dto.TravelDTO;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Service
@@ -17,6 +18,22 @@ import java.util.*;
 public class RouteServiceImpl implements RouteService {
 
     private final Neo4jClient neo4jClient;
+    private final String getRoutesQuery =
+            "MATCH p=((a)-[t:Travel*]->(b)) " +
+            "WHERE a.city=$cityA AND b.city=$cityB AND  length(p) < $cities AND " +
+            "reduce(totaltime = duration('P0DT0H0M'), trip IN relationships(p) | " +
+            "        totaltime + (duration.inSeconds(datetime(trip.departure), datetime(trip.arrival))) " +
+            "    ).hours  < $hoursInTravel AND " +
+            "datetime() + duration.inSeconds(datetime(t[0].departure), datetime($travelDateTime)) <  datetime() AND " +
+            "datetime() + duration.inSeconds(datetime(t[0].departure), datetime($travelDateTime)) < datetime() + duration({days: 1}) " +
+            "RETURN " +
+            "nodes(p), " +
+            "relationships(p), " +
+            "reduce(totalprice = 0, trip IN relationships(p) | totalprice + toInteger(trip.price)) AS price, " +
+            "reduce(totaltime = duration('P0DT0H0M'), trip IN relationships(p) | " +
+            "        totaltime + (duration.inSeconds(datetime(trip.departure), datetime(trip.arrival))) " +
+            "    ) as time " +
+            "ORDER BY price, time DESC";
 
     @Autowired
     public RouteServiceImpl(Neo4jClient neo4jClient) {
@@ -24,23 +41,16 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Collection<RouteDTO> getRoutesByCitiesAndTransfersLimit(String cityA, String cityB, int transfers) {
+    public Collection<RouteDTO> getRoutes(String cityA, String cityB, int transfers, int hoursInTravel, ZonedDateTime travelDateTime) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("cityA", cityA);
         parameters.put("cityB", cityB);
         parameters.put("cities", transfers+2);
+        parameters.put("hoursInTravel", hoursInTravel);
+        parameters.put("travelDateTime", travelDateTime);
 
         return neo4jClient
-                .query(
-                "MATCH p=((a)-[t:Travel*]->(b)) " +
-                        "WHERE a.city=$cityA AND b.city=$cityA AND length(p)<$cities " +
-                        "RETURN nodes(p), " +
-                        "relationships(p), " +
-                        "reduce(totalprice = 0, trip IN relationships(p) | totalprice + toInteger(trip.price)) AS price, " +
-                        "reduce(totaltime = duration('P0DT0H0M'), trip IN relationships(p) | " +
-                        "totaltime + (duration.inSeconds(datetime(trip.arrival), datetime(trip.departure))) " +
-                        ") AS time " +
-                        "ORDER BY time DESC , price DESC ")
+                .query(getRoutesQuery)
                 .bindAll(parameters)
                 .fetchAs(RouteDTO.class)
                 .mappedBy((typeSystem, record) -> {
