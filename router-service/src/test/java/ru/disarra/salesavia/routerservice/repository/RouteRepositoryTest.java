@@ -1,11 +1,11 @@
-package ru.disarra.salesavia.routerservice.service;
+package ru.disarra.salesavia.routerservice.repository;
 
 import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RouteServiceTest {
+public class RouteRepositoryTest {
 
     @Test
     public void getRoutesTest() {
