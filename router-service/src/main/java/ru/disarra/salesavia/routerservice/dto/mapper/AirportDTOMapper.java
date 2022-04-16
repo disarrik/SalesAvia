@@ -11,6 +11,6 @@ import java.util.function.BiFunction;
 public class AirportDTOMapper implements BiFunction<TypeSystem, Record, AirportDTO> {
     @Override
     public AirportDTO apply(TypeSystem typeSystem, Record record) {
-        return new AirportDTO(record.get("city").toString(), record.get("name").toString());
+        return new AirportDTO(record.get("city").asString(), record.get("name").asString());
     }
 }

@@ -21,17 +21,17 @@ public class RouteDTOMapper implements BiFunction<TypeSystem, Record, RouteDTO> 
         for (var airport : record.get(0).asList()) {
             airportDTOs.add(
                     new AirportDTO(
-                            ((InternalNode) airport).get("city").toString(),
-                            ((InternalNode) airport).get("name").toString()
+                            ((InternalNode) airport).get("city").asString(),
+                            ((InternalNode) airport).get("name").asString()
                     ));
         }
         List<TravelDTO> travelDTOs = new ArrayList<>();
         for (var travel : record.get(1).asList()) {
             travelDTOs.add(
                     new TravelDTO(
-                            ((InternalRelationship) travel).get("price").toString(),
-                            ((InternalRelationship) travel).get("arrival").toString(),
-                            ((InternalRelationship) travel).get("departure").toString()
+                            ((InternalRelationship) travel).get("price").asString(),
+                            ((InternalRelationship) travel).get("arrival").asString(),
+                            ((InternalRelationship) travel).get("departure").asString()
                     ));
         }
         return new RouteDTO(airportDTOs, travelDTOs);
