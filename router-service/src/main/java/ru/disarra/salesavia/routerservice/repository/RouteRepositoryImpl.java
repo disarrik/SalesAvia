@@ -1,15 +1,11 @@
 package ru.disarra.salesavia.routerservice.repository;
 
-import org.neo4j.driver.internal.InternalNode;
-import org.neo4j.driver.internal.InternalRelationship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import ru.disarra.salesavia.routerservice.dto.AirportDTO;
 import ru.disarra.salesavia.routerservice.dto.RouteDTO;
-import ru.disarra.salesavia.routerservice.dto.TravelDTO;
+import ru.disarra.salesavia.routerservice.dto.mapper.RouteDTOMapper;
 
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -19,6 +15,7 @@ import java.util.*;
 public class RouteRepositoryImpl implements RouteRepository {
 
     private final Neo4jClient neo4jClient;
+    private final RouteDTOMapper routeDTOMapper;
     private final String getRoutesQuery =
             "MATCH p=((a)-[t:Travel*]->(b)) " +
             "WHERE a.city=$cityA AND b.city=$cityB AND  length(p) < $cities AND " +
@@ -37,8 +34,9 @@ public class RouteRepositoryImpl implements RouteRepository {
             "ORDER BY price, time DESC";
 
     @Autowired
-    public RouteRepositoryImpl(Neo4jClient neo4jClient) {
+    public RouteRepositoryImpl(Neo4jClient neo4jClient, RouteDTOMapper routeDTOMapper) {
         this.neo4jClient = neo4jClient;
+        this.routeDTOMapper = routeDTOMapper;
     }
 
     @Override
@@ -54,26 +52,7 @@ public class RouteRepositoryImpl implements RouteRepository {
                 .query(getRoutesQuery)
                 .bindAll(parameters)
                 .fetchAs(RouteDTO.class)
-                .mappedBy((typeSystem, record) -> {
-                    List<AirportDTO> airportDTOs = new ArrayList<>();
-                    for (var airport : record.get(0).asList()) {
-                        airportDTOs.add(
-                                new AirportDTO(
-                                        ((InternalNode) airport).get("city").toString(),
-                                        ((InternalNode) airport).get("name").toString()
-                        ));
-                    }
-                    List<TravelDTO> travelDTOs = new ArrayList<>();
-                    for (var travel : record.get(1).asList()) {
-                        travelDTOs.add(
-                                new TravelDTO(
-                                        ((InternalRelationship) travel).get("price").toString(),
-                                        ((InternalRelationship) travel).get("arrival").toString(),
-                                        ((InternalRelationship) travel).get("departure").toString()
-                                ));
-                    }
-                    return new RouteDTO(airportDTOs, travelDTOs);
-                })
+                .mappedBy(routeDTOMapper)
                 .all();
     }
 }
