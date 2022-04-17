@@ -15,3 +15,25 @@ services:
     environment:
       NEO4J_AUTH: none
       NEO4JLABS_PLUGINS: '["apoc"]'
+    healthcheck:
+      test: [ "CMD", "cypher-shell", "match (n) return count(n)" ]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 40s
+
+  router-service:
+    build:
+      context: ./router-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      NEO4J_HOST: db
+      NEO4J_USERNAME: neo4j
+      NEO4J_PASSWORD: neo4j
+    links:
+      - neo4j:db
+    depends_on:
+      neo4j:
+        condition: service_healthy

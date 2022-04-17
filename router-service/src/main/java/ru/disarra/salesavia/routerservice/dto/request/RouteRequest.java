@@ -1,4 +1,4 @@
-package ru.disarra.salesavia.routerservice.dto.requests;
+package ru.disarra.salesavia.routerservice.dto.request;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

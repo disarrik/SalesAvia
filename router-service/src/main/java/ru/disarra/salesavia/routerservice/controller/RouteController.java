@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.disarra.salesavia.routerservice.dto.RouteDTO;
-import ru.disarra.salesavia.routerservice.dto.requests.RouteRequest;
+import ru.disarra.salesavia.routerservice.dto.request.RouteRequest;
 import ru.disarra.salesavia.routerservice.service.RouteService;
 
 import java.util.Collection;
