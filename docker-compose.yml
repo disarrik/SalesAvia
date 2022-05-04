@@ -2,26 +2,18 @@ version: "3.9"
 services:
 
   neo4j:
-    build:
-      context: ./router-service/data
-      dockerfile: Dockerfile
+    image: neo4j
     ports:
       - "7474:7474"
       - "7687:7687"
-    volumes:
-      - ./router-service/data/volumes/import:/var/lib/neo4j/import
-      - ./router-service/data/volumes/logs:/logs
-      - ./router-service/data/volumes/plugins:/plugins
-      - ./router-service/data/volumes/data:/data
     environment:
       NEO4J_AUTH: none
       NEO4JLABS_PLUGINS: '["apoc"]'
     healthcheck:
-      test: [ "CMD", "/var/lib/neo4j/bin/neo4j", "status" ]
-      interval: 40s
-      timeout: 10s
-      retries: 5
-      start_period: 50s
+      test: [ "CMD", "/var/lib/neo4j/bin/cypher-shell", "MATCH () RETURN count(*) as count"]
+      interval: 10s
+      timeout: 4s
+      retries: 20
 
   router-service:
     build:
@@ -34,6 +26,7 @@ services:
       NEO4J_USERNAME: neo4j
       NEO4J_PASSWORD: neo4j
       EUREKA_HOST: eureka-server
+      spring_profiles_active: dev #При включении с профилем dev должны произойти миграции тестовых данных для демонтсрации работы
     links:
       - neo4j:db
     depends_on:

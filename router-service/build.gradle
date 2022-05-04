@@ -18,8 +18,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.7'
+    implementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:1.5.4'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:1.5.4'
     testImplementation 'org.testcontainers:testcontainers:1.17.1'
     testImplementation "org.testcontainers:junit-jupiter:1.16.3"
     testImplementation 'org.testcontainers:neo4j:1.17.1'
