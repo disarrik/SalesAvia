@@ -13,9 +13,11 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.7'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:1.5.4'
     testImplementation 'org.testcontainers:testcontainers:1.17.1'

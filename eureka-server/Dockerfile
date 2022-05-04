@@ -14,7 +14,7 @@ RUN gradle clean assemble
 
 # actual container
 FROM openjdk:11
-ENV ARTIFACT_NAME=router-service-0.0.1-SNAPSHOT.jar
+ENV ARTIFACT_NAME=eureka-server-0.0.1-SNAPSHOT.jar
 ENV APP_HOME=/usr/app/
 
 WORKDIR $APP_HOME
