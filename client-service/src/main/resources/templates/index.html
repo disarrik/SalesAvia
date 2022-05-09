@@ -1,0 +1,115 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/style.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/bootstrap-social.css" rel="stylesheet">
+    <title>Главная</title>
+</head>
+<body>
+
+<header class="fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-lg">
+            <a class="navbar-brand">
+                SalesAvia
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Поиск маршрутов</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">О путешествиях</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container-lg">
+        <div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div th:each="slide, iter: ${slides}" th:class="${iter.index == 0} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="10000">
+                    <div class="image-wrapper">
+                        <img th:src="${slide.getImageUrl()}" class="d-block" alt="...">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block text-white">
+                        <h5 th:text="${slide.getTitle()}"></h5>
+                        <p th:text="${slide.getShortDescription()}"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="cards">
+            <div class="card row">
+                <div class="col-4 image-col">
+                    <div class="image-wrapper">
+                        <img src="img/3.png" alt="">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <a href="/search"><h2>Построить маршрут</h2></a>
+                    <p>Наш сервис позволяет строить маршурты для того, чтобы ваша поездка была максимально дешевой и комфортной</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container-lg bg-light rounded-top mt-5">
+        <div class="row align-items-end">
+            <div class="col-4">
+                <nav>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="" class="nav-link">Главная</a></li>
+                        <li class="nav-item"><a href="" class="nav-link">Поиск маршрутов</a></li>
+                        <li class="nav-item"><a href="" class="nav-link">О путешествиях</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-5">
+                <!-- empty -->
+            </div>
+            <div class="col-3">
+                <a class="btn btn-social-icon btn-vk column">
+                    <span class="fa fa-vk"></span>
+                </a>
+                <a class="btn btn-social-icon btn-odnoklassniki">
+                    <span class="fa fa-odnoklassniki"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

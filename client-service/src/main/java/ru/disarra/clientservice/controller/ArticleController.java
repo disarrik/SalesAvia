@@ -21,10 +21,10 @@ public class ArticleController {
     }
 
     @GetMapping
-    public String index(Model model, @RequestParam(defaultValue = "0") int page) {
+    public String index(Model model, @RequestParam(defaultValue = "1") int page) {
         model.addAttribute(
                 "articles",
-                articleService.getPage(page, articlesOnOnePage)
+                articleService.getPage(page-1, articlesOnOnePage)
         );
         return "articles";
     }
