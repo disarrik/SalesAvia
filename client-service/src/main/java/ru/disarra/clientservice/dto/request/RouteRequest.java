@@ -3,7 +3,7 @@ package ru.disarra.clientservice.dto.request;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public class RouteRequest {
     @NotNull
@@ -17,12 +17,12 @@ public class RouteRequest {
     @Min(1)
     private int hoursInTravel = 24;
     @NotNull
-    private ZonedDateTime travelTime;
+    private LocalDateTime travelTime;
 
     public RouteRequest() {
     }
 
-    public RouteRequest(String cityA, String cityB, int transfers, int hoursInTravel, ZonedDateTime zonedDateTime) {
+    public RouteRequest(String cityA, String cityB, int transfers, int hoursInTravel, LocalDateTime zonedDateTime) {
         this.cityA = cityA;
         this.cityB = cityB;
         this.transfers = transfers;
@@ -62,11 +62,11 @@ public class RouteRequest {
         this.hoursInTravel = hoursInTravel;
     }
 
-    public ZonedDateTime getTravelTime() {
+    public LocalDateTime getTravelTime() {
         return travelTime;
     }
 
-    public void setTravelTime(ZonedDateTime travelTime) {
+    public void setTravelTime(LocalDateTime travelTime) {
         this.travelTime = travelTime;
     }
 }

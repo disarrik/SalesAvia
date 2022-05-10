@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+  <meta charset="UTF-8" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+  <header th:fragment="header" class="fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container-lg">
+        <a href="/" class="navbar-brand">
+          SalesAvia
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Главная</a>
+            </li>
+            <li class="nav-item">
+              <a href="/search" class="nav-link">Поиск маршрутов</a>
+            </li>
+            <li class="nav-item">
+              <a href="/articles" class="nav-link">О путешествиях</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+  <footer th:fragment="footer">
+    <div class="container-lg bg-light rounded-top mt-5">
+      <div class="row align-items-end">
+        <div class="col-4">
+          <nav>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
+              <li class="nav-item"><a href="/search" class="nav-link">Поиск маршрутов</a></li>
+              <li class="nav-item"><a href="/articles" class="nav-link">О путешествиях</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-5">
+          <!-- empty -->
+        </div>
+        <div class="col-3">
+          <a class="btn btn-social-icon btn-vk column">
+            <span class="fa fa-vk"></span>
+          </a>
+          <a class="btn btn-social-icon btn-odnoklassniki">
+            <span class="fa fa-odnoklassniki"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
