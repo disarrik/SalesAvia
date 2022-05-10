@@ -22,7 +22,6 @@ public class RouteController {
 
     @GetMapping
     public Collection<RouteDTO> getRoutes(@Validated RouteRequest routeRequest) {
-        System.out.println(routeRequest.getTravelTime());
         return routeService.getRoutes(
                 routeRequest.getCityA(),
                 routeRequest.getCityB(),
