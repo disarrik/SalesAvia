@@ -34,6 +34,7 @@ public class RouteDTOMapper implements BiFunction<TypeSystem, Record, RouteDTO> 
                             ((InternalRelationship) travel).get("departure").asString()
                     ));
         }
-        return new RouteDTO(airportDTOs, travelDTOs);
+        int price = record.get(2).asInt();
+        return new RouteDTO(airportDTOs, travelDTOs, price);
     }
 }

@@ -62,4 +62,14 @@ select {
 
 .flight-details {
     margin: auto 0;
+    justify-content: center;
+}
+
+.flight-details p {
+    text-align: center;
+}
+
+.flight-details span {
+    padding: 5px;
+    text-align: center;
 }

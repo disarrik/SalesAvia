@@ -5,10 +5,12 @@ import java.util.List;
 public class RouteDTO {
     private List<AirportDTO> airports;
     private List<TravelDTO> travels;
+    private int price;
 
-    public RouteDTO(List<AirportDTO> airports, List<TravelDTO> travels) {
+    public RouteDTO(List<AirportDTO> airports, List<TravelDTO> travels, int price) {
         this.airports = airports;
         this.travels = travels;
+        this.price = price;
     }
 
     public RouteDTO() {
@@ -28,6 +30,14 @@ public class RouteDTO {
 
     public void setTravels(List<TravelDTO> travels) {
         this.travels = travels;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override

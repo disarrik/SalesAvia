@@ -1,0 +1,146 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/style.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/bootstrap-social.css" rel="stylesheet">
+    <title>Поиск маршрутов</title>
+  </head>
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-lg">
+          <a class="navbar-brand">
+            SalesAvia
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="" class="nav-link">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">Поиск маршрутов</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">О путешествиях</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+        <div class="container-lg">
+            <form action="/search.html" class="row align-items-center">
+                <div class="row justify-content-between">
+                    <input type="text" list="cities" placeholder="Город отправления" name="cityA" id="cityA" class="col-5 m-1">
+                    <input type="text" list="cities" placeholder="Город приезда" name="cityB" id="cityB" class="col-5 m-1">
+                    <datalist id="cities">
+                        <option value="Москва">
+                        <option value="Санкт-Петербург">
+                        <option value="Екатеринбург">
+                    </datalist>
+                    <input type="submit" value="Поиск" class="col-1">
+                </div>
+                <div class="row justify-content-between mt-1">
+                    <div class="col-3 m-1 d-flex align-items-center">
+                        <span class="m-1">Кол-во пересадок</span>
+                        <select class="form-select" name="transfers">
+                            <option selected value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="col-3 m-1 d-flex align-items-center">
+                        <span class="m-1">Часы в пути</span>
+                        <select class="form-select" name="hoursInTravel">
+                            <option selected value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-4 m-1 d-flex align-items-center">
+                        <span class="m-1">Время отправления</span>
+                        <input id="travelTime" type="datetime-local" name="travelTime">
+                    </div>
+                </div>
+            </form>
+
+            <div class="search-results row">
+                <div th:each="route: ${routes}" class="search-result bg-light d-flex">
+                    <div class="plane-up col-2">
+                        <div class="image-wrapper">
+                            <img src="/img/plane-up.png" alt="">
+                        </div>
+                    </div>
+                    <div class="flight-details d-flex flex-column">
+                        <p class="cities">
+                            <span th:each="airport: ${route.getAirports()}">
+                                <span th:text="${airport.getCity()} "></span>
+                            </span>
+                        </p>
+                        <p class="times d-flex justify-content-between">
+                            <span th:text="${route.getTravels().get(0).getDeparture()}"></span>
+                            <span th:text="${route.getTravels().get(route.getTravels().size()-1).getArrival()}"></span>
+                        </p>
+                        <p class="cost d-flex justify-content-around" th:text="${route.getPrice()}"></p>
+                    </div>
+                    <div class="plane-down col-2">
+                        <div class="image-wrapper">
+                            <img src="/img/plane-down.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container-lg bg-light rounded-top mt-5">
+            <div class="row align-items-end">
+                <div class="col-4">
+                    <nav>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="" class="nav-link">Главная</a></li>
+                            <li class="nav-item"><a href="" class="nav-link">Поиск маршрутов</a></li>
+                            <li class="nav-item"><a href="" class="nav-link">О путешествиях</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-5">
+                    <!-- empty -->
+                </div>
+                <div class="col-3">
+                    <a class="btn btn-social-icon btn-vk column">
+                        <span class="fa fa-vk"></span>
+                    </a>
+                    <a class="btn btn-social-icon btn-odnoklassniki">
+                        <span class="fa fa-odnoklassniki"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
