@@ -1,5 +1,7 @@
 package ru.disarra.salesavia.routerservice.dto.request;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,12 +24,12 @@ public class RouteRequest {
     public RouteRequest() {
     }
 
-    public RouteRequest(String cityA, String cityB, int transfers, int hoursInTravel, ZonedDateTime zonedDateTime) {
+    public RouteRequest(String cityA, String cityB, int transfers, int hoursInTravel, ZonedDateTime travelTime) {
         this.cityA = cityA;
         this.cityB = cityB;
         this.transfers = transfers;
         this.hoursInTravel = hoursInTravel;
-        this.travelTime = zonedDateTime;
+        this.travelTime = travelTime;
     }
 
     public String getCityA() {

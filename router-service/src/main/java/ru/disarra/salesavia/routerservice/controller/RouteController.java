@@ -2,10 +2,7 @@ package ru.disarra.salesavia.routerservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.disarra.salesavia.routerservice.dto.RouteDTO;
 import ru.disarra.salesavia.routerservice.dto.request.RouteRequest;
 import ru.disarra.salesavia.routerservice.service.RouteService;
@@ -24,7 +21,8 @@ public class RouteController {
     }
 
     @GetMapping
-    public Collection<RouteDTO> getRoutes(@RequestBody @Validated RouteRequest routeRequest) {
+    public Collection<RouteDTO> getRoutes(@Validated RouteRequest routeRequest) {
+        System.out.println(routeRequest.getTravelTime());
         return routeService.getRoutes(
                 routeRequest.getCityA(),
                 routeRequest.getCityB(),
