@@ -18,28 +18,35 @@
 
 <main>
     <div class="container-lg">
-        <div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div id="myCarousel" class="carousel slide bg-light" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                        aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div th:each="slide, iter: ${slides}" th:class="${iter.index == 0} ? 'carousel-item active' : 'carousel-item'" data-bs-interval="10000">
+
+                <div th:each="slide, iter: ${slides}" th:class="${iter.index == 0} ? 'carousel-item active' : 'carousel-item'">
                     <div class="image-wrapper">
                         <img th:src="${slide.getImageUrl()}" class="d-block" alt="...">
                     </div>
-                    <div class="carousel-caption d-none d-md-block text-white">
-                        <h5 th:text="${slide.getTitle()}"></h5>
-                        <p th:text="${slide.getShortDescription()}"></p>
+
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1 th:text="${slide.getTitle()}"></h1>
+                            <p th:text="${slide.getShortDescription()}"></p>
+                            <p><a class="btn btn-lg btn-primary" th:href="@{/articles/?title={title}(title=${slide.getTitle()})}">Читать</a></p>
+                        </div>
                     </div>
                 </div>
+
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -53,7 +60,7 @@
                     </div>
                 </div>
                 <div class="col-8">
-                    <a href="/search"><h2>Построить маршрут</h2></a>
+                    <a href="/search" class="text-decoration-none text-reset"><h2>Построить маршрут</h2></a>
                     <p>Наш сервис позволяет быстро строить оптимальные маршурты, чтобы ваша поездка была максимально дешевой и комфортной</p>
                 </div>
             </div>

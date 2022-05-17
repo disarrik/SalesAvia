@@ -18,30 +18,24 @@
 
     <main>
         <div class="container-lg">
-            <form action="/search" class="row align-items-center">
-                <div class="row justify-content-between">
-                    <input type="text" list="cities" placeholder="Город отправления" name="cityA" id="cityA" class="col-5 m-1">
-                    <input type="text" list="cities" placeholder="Город приезда" name="cityB" id="cityB" class="col-5 m-1">
-                    <datalist id="cities">
-                        <option value="Москва">
-                        <option value="Санкт-Петербург">
-                        <option value="Екатеринбург">
-                    </datalist>
-                    <input type="submit" value="Поиск" class="col-1">
-                </div>
-                <div class="row justify-content-between mt-1">
-                    <div class="col-3 m-1 d-flex align-items-center">
-                        <span class="m-1">Кол-во пересадок</span>
-                        <select class="form-select" name="transfers">
-                            <option selected value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+            <form action="/search" class="row align-items-center justify-content-center">
+                <div class="m-1 col-lg-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" list="cities" placeholder="Город отправления" name="cityA" id="cityA">
+                        <input class="form-control" type="text" list="cities" placeholder="Город приезда" name="cityB" id="cityB" >
+                        <datalist id="cities">
+                            <option value="Москва">
+                            <option value="Санкт-Петербург">
+                            <option value="Екатеринбург">
+                        </datalist>
                     </div>
-                    <div class="col-3 m-1 d-flex align-items-center">
-                        <span class="m-1">Часы в пути</span>
-                        <select class="form-select" name="hoursInTravel">
+                </div>
+                <div class="m-1 col-lg-6 d-flex align-items-center">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text">Дата</span>
+                        <input id="travel_time" class="form-control" type="datetime-local" name="travelTime">
+                        <span class="input-group-text">Часов</span>
+                        <select class="form-control" name="hoursInTravel">
                             <option selected value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -53,16 +47,22 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                    </div>
-                    <div class="col-4 m-1 d-flex align-items-center">
-                        <span class="m-1">Время отправления</span>
-                        <input id="travelTime" type="datetime-local" name="travelTime">
+                        <span class="input-group-text">Пересадок</span>
+                        <select class="form-control" name="transfers">
+                            <option selected value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
                     </div>
                 </div>
+                <input type="submit" value="Поиск" class="m-1 btn btn-light submit-btn col-lg-1 col-md-3">
             </form>
 
+            <hr>
+
             <div class="search-results row">
-                <div th:each="route: ${routes}" class="search-result bg-light d-flex">
+                <div th:each="route: ${routes}" class="search-result bg-light d-flex mt-1">
                     <div class="plane-up col-2">
                         <div class="image-wrapper">
                             <img src="/img/plane-up.png" alt="">
@@ -74,10 +74,12 @@
                                 <span th:text="${airport.getCity()} "></span>
                             </span>
                         </p>
+                        <hr>
                         <p class="times d-flex justify-content-between">
                             <span th:text="${route.getTravels().get(0).getDeparture()}"></span>
                             <span th:text="${route.getTravels().get(route.getTravels().size()-1).getArrival()}"></span>
                         </p>
+                        <hr>
                         <p class="cost d-flex justify-content-around" th:text="${route.getPrice()}"></p>
                     </div>
                     <div class="plane-down col-2">

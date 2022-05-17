@@ -7,6 +7,10 @@ main {
     margin-top: 70px;
 }
 
+select {
+    min-width: 90px !important;
+}
+
 .carousel .image-wrapper {
     height: 600px;
 }
@@ -21,7 +25,7 @@ main {
 }
 
 .image-wrapper img {
-    min-width: 100%;
+    min-height: 100%;
     flex-shrink: 1;
 }
 
@@ -44,32 +48,23 @@ form {
     margin-bottom: 40px;
 }
 
-select {
-    height: fit-content;
-    max-width: 70px;
+.submit-btn {
+    min-width: 40px;
 }
 
 .search-result {
     flex-direction: row;
     justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .plane-up,
 .plane-down {
     margin: auto 0;
     width: 100px;
-} 
+}
 
 .flight-details {
     margin: auto 0;
-    justify-content: center;
-}
-
-.flight-details p {
-    text-align: center;
-}
-
-.flight-details span {
-    padding: 5px;
-    text-align: center;
 }
