@@ -27,7 +27,7 @@ public class ArticleService {
         );
     }
 
-    public ArticleDTO getBiTitle(String title) throws ArticleNotFoundException {
+    public ArticleDTO getByTitle(String title) throws ArticleNotFoundException {
         return articleRepository.findByTitle(title)
                 .orElseThrow(ArticleNotFoundException::new);
     }

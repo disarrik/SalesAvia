@@ -28,4 +28,13 @@ public class ArticleController {
         );
         return "articles";
     }
+
+    @GetMapping(params = "title")
+    public String article(Model model, @RequestParam String title) {
+        model.addAttribute(
+                "article",
+                articleService.getByTitle(title)
+        );
+        return "article";
+    }
 }

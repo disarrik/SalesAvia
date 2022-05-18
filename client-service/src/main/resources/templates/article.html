@@ -18,21 +18,16 @@
 
 <main>
     <div class="container-lg">
-        <div class="cards">
-            <div th:each="article: ${articles}" class="card row">
-                <div class="col-4 image-col">
-                    <div class="image-wrapper">
-                        <img th:src="${article.getImageUrl()}" alt="">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <a th:href="@{/articles(title=${article.getTitle()})}" class="text-reset text-decoration-none">
-                        <h2 th:text="${article.getTitle()}"></h2>
-                    </a>
-                    <p th:text="${article.getShortDescription()}"></p>
-                </div>
-            </div>
+        <div class="image-wrapper .article-header">
+            <img th:src="${article.getImageUrl()}" alt="">
         </div>
+        <h1 th:text="${article.getTitle()}" class="article-title"></h1>
+        <div class="article-meta-inf float-end">
+            <span th:text='${article.getPosted().getMonth() + " " + article.getPosted().getDayOfMonth() + " " + article.getPosted().getZone().toString()}' class="posted-on"></span>
+            <br>
+            <span th:text="${article.getAuthor()}" class="posted by"></span>
+        </div>
+        <p th:text="${article.getContent()}" class="mt-5"></p>
     </div>
 </main>
 

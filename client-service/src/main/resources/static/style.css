@@ -29,6 +29,13 @@ select {
     flex-shrink: 1;
 }
 
+.search-results .image-wrapper img {
+    min-width: 100%;
+    flex-shrink: 1;
+}
+
+
+
 .card {
     margin: 20px 0;
     height: 300px;
@@ -67,4 +74,8 @@ form {
 
 .flight-details {
     margin: auto 0;
+}
+
+.article-header {
+    height: 300px;
 }
