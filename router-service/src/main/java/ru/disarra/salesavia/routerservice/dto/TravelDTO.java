@@ -1,5 +1,7 @@
 package ru.disarra.salesavia.routerservice.dto;
 
+import ru.disarra.salesavia.routerservice.dto.request.CreateTravelRequest;
+
 public class TravelDTO {
     private String price;
     private String arrival;
@@ -36,6 +38,14 @@ public class TravelDTO {
 
     public void setDeparture(String departure) {
         this.departure = departure;
+    }
+
+    public static TravelDTO of(CreateTravelRequest createTravelRequest) {
+        return new TravelDTO(
+                String.valueOf(createTravelRequest.getPrice()),
+                createTravelRequest.getArrival().toString(),
+                createTravelRequest.getDeparture().toString()
+        );
     }
 
     @Override
