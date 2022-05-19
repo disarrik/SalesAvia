@@ -1,4 +1,4 @@
-FROM gradle:7.0.0-jdk11 AS TEMP_BUILD_IMAGE
+FROM gradle:7.4.2-jdk18 AS TEMP_BUILD_IMAGE
 ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
 COPY build.gradle settings.gradle $APP_HOME
@@ -13,7 +13,7 @@ COPY . .
 RUN gradle clean assemble
 
 # actual container
-FROM openjdk:11
+FROM openjdk:17
 ENV ARTIFACT_NAME=router-service-0.0.1-SNAPSHOT.jar
 ENV APP_HOME=/usr/app/
 

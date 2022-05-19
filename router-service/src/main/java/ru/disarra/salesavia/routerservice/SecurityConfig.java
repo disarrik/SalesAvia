@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .authorizeRequests()
                     .antMatchers("/route").permitAll()
+                    .antMatchers("/actuator/*").permitAll()
                     .anyRequest().hasRole("ADMIN")
                     .and()
                 .httpBasic();

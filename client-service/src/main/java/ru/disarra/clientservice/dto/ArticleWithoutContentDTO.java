@@ -1,5 +1,7 @@
 package ru.disarra.clientservice.dto;
 
+import ru.disarra.clientservice.entity.Author;
+
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -7,11 +9,11 @@ import java.util.Objects;
 public class ArticleWithoutContentDTO {
     private String title;
     private String shortDescription;
-    private String author;
+    private Author author;
     private String imageUrl;
     private ZonedDateTime posted;
 
-    public ArticleWithoutContentDTO(String title, String shortDescription, String content, String author, String imageUrl, ZonedDateTime posted) {
+    public ArticleWithoutContentDTO(String title, String shortDescription, String content, Author author, String imageUrl, ZonedDateTime posted) {
         this.title = title;
         this.shortDescription = shortDescription;
         this.author = author;
@@ -36,11 +38,11 @@ public class ArticleWithoutContentDTO {
     }
 
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

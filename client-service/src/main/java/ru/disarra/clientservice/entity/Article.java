@@ -1,9 +1,6 @@
 package ru.disarra.clientservice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,7 +24,9 @@ public class Article{
     private String content;
 
     @Size(max = 70)
-    private String author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author")
+    private Author author;
 
     @NotBlank
     private String imageUrl;
@@ -63,11 +62,15 @@ public class Article{
         this.content = content;
     }
 
-    public String getAuthor() {
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

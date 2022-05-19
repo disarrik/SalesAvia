@@ -69,8 +69,8 @@ services:
     depends_on:
       eureka-server:
         condition: service_healthy
-      router-service:
-        condition: service_healthy
+      # router-service:
+      #   condition: service_healthy
       postgres:
         condition: service_healthy
 

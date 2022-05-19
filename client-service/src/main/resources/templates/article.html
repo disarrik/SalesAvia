@@ -25,7 +25,7 @@
         <div class="article-meta-inf float-end">
             <span th:text='${article.getPosted().getMonth() + " " + article.getPosted().getDayOfMonth() + " " + article.getPosted().getZone().toString()}' class="posted-on"></span>
             <br>
-            <span th:text="${article.getAuthor()}" class="posted by"></span>
+            <span th:text="${article.getAuthor().getName()}" class="posted by"></span>
         </div>
         <p th:text="${article.getContent()}" class="mt-5"></p>
     </div>
