@@ -4,10 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.disarra.salesavia.routerservice.dto.AirportDTO;
 import ru.disarra.salesavia.routerservice.service.AirportService;
 
-@Controller
+@RestController
 @RequestMapping("/airport")
 public class AirportController {
     private final AirportService airportService;
