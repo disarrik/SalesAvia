@@ -2,19 +2,19 @@ version: "3.9"
 services:
 
   neo4j:
-    image: neo4j:4.4.6
+    build: 
+      context: ./neo4j-route-plugin
+      dockerfile: Dockerfile
     ports:
       - "7474:7474"
       - "7687:7687"
-    volumes:
-      - ./plugins:/var/lib/neo4j/plugins
     environment:
       NEO4J_AUTH: none
       NEO4JLABS_PLUGINS: '["apoc"]'
     healthcheck:
       test: [ "CMD", "/var/lib/neo4j/bin/cypher-shell", "MATCH () RETURN count(*) as count"]
       interval: 10s
-      timeout: 4s
+      timeout: 5s
       retries: 20
 
   router-service:

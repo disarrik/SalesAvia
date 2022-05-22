@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0e3fc96-ce08-493e-9126-b933838811e0" name="Changes" comment="Плагин для поиска маршрута">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a0e3fc96-ce08-493e-9126-b933838811e0" name="Changes" comment="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;">
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../router-service/.dockerignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653213471658</updated>
-      <workItem from="1653213473435" duration="1723000" />
+      <workItem from="1653213473435" duration="2775000" />
     </task>
     <task id="LOCAL-00001" summary="Плагин для поиска маршрута">
       <created>1653214191864</created>
@@ -111,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653214191864</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;">
+      <created>1653215394710</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653215394710</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Плагин для поиска маршрута" />
-    <option name="LAST_COMMIT_MESSAGE" value="Плагин для поиска маршрута" />
+    <MESSAGE value="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;" />
   </component>
 </project>
