@@ -16,22 +16,7 @@ public class RouteRepositoryImpl implements RouteRepository {
 
     private final Neo4jClient neo4jClient;
     private final RouteDTOMapper routeDTOMapper;
-    private final String getRoutesQuery =
-            "MATCH p=((a)-[t:Travel*]->(b)) " +
-            "WHERE a.city=$cityA AND b.city=$cityB AND  length(p) < $cities AND " +
-            "reduce(totaltime = duration('P0DT0H0M'), trip IN relationships(p) | " +
-            "        totaltime + (duration.inSeconds(datetime(trip.departure), datetime(trip.arrival))) " +
-            "    ).hours  < $hoursInTravel AND " +
-            "datetime() + duration.inSeconds(datetime(t[0].departure), datetime($travelDateTime)) <  datetime() AND " +
-            "datetime() + duration.inSeconds(datetime(t[0].departure), datetime($travelDateTime)) < datetime() + duration({days: 1}) " +
-            "RETURN " +
-            "nodes(p), " +
-            "relationships(p), " +
-            "reduce(totalprice = 0, trip IN relationships(p) | totalprice + toInteger(trip.price)) AS price, " +
-            "reduce(totaltime = duration('P0DT0H0M'), trip IN relationships(p) | " +
-            "        totaltime + (duration.inSeconds(datetime(trip.departure), datetime(trip.arrival))) " +
-            "    ) as time " +
-            "ORDER BY price, time DESC";
+    private final String getRoutesQuery = "CALL route($cityA, $cityB, $hoursInTravel, $travelDateTime, $transfers)";
 
     @Autowired
     public RouteRepositoryImpl(Neo4jClient neo4jClient, RouteDTOMapper routeDTOMapper) {
@@ -44,7 +29,7 @@ public class RouteRepositoryImpl implements RouteRepository {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("cityA", cityA);
         parameters.put("cityB", cityB);
-        parameters.put("cities", transfers+2);
+        parameters.put("transfers", transfers);
         parameters.put("hoursInTravel", hoursInTravel);
         parameters.put("travelDateTime", travelDateTime);
 

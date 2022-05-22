@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0e3fc96-ce08-493e-9126-b933838811e0" name="Changes" comment="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;">
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a0e3fc96-ce08-493e-9126-b933838811e0" name="Changes" comment="Создал докер-образ с neo4j и плагином&#10;&#10;Запустить можно командой&#10;docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=none &lt;тег собранного образа&gt;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,7 +97,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653213471658</updated>
-      <workItem from="1653213473435" duration="2775000" />
+      <workItem from="1653213473435" duration="3335000" />
     </task>
     <task id="LOCAL-00001" summary="Плагин для поиска маршрута">
       <created>1653214191864</created>

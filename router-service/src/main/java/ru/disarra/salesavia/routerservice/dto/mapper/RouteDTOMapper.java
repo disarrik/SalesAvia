@@ -11,6 +11,7 @@ import ru.disarra.salesavia.routerservice.dto.TravelDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 
 @Component
@@ -21,17 +22,17 @@ public class RouteDTOMapper implements BiFunction<TypeSystem, Record, RouteDTO> 
         for (var airport : record.get(0).asList()) {
             airportDTOs.add(
                     new AirportDTO(
-                            ((InternalNode) airport).get("city").asString(),
-                            ((InternalNode) airport).get("name").asString()
+                            ((Map) airport).get("city").toString(),
+                            ((Map) airport).get("name").toString()
                     ));
         }
         List<TravelDTO> travelDTOs = new ArrayList<>();
         for (var travel : record.get(1).asList()) {
             travelDTOs.add(
                     new TravelDTO(
-                            ((InternalRelationship) travel).get("price").asString(),
-                            ((InternalRelationship) travel).get("arrival").asString(),
-                            ((InternalRelationship) travel).get("departure").asString()
+                            ((Map) travel).get("price").toString(),
+                            ((Map) travel).get("arrival").toString(),
+                            ((Map) travel).get("departure").toString()
                     ));
         }
         int price = record.get(2).asInt();
