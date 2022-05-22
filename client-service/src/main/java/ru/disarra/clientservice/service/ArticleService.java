@@ -1,6 +1,7 @@
 package ru.disarra.clientservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Iterable<ArticleWithoutContentDTO> getPage(int pageNum, int itemsOnPage) {
+    public Page<ArticleWithoutContentDTO> getPage(int pageNum, int itemsOnPage) {
         return articleRepository.findAllProjectedBy(
                 PageRequest.of(
                         pageNum,

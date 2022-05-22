@@ -33,6 +33,19 @@
                 </div>
             </div>
         </div>
+        <nav>
+            <ul class="pagination">
+                <li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
+                    <a class="page-link" th:href="@{/articles(page=${currentPage-1})}">Previous</a>
+                </li>
+                <li th:each="page : ${pages}" th:class="${currentPage == page} ? 'page-item active' : 'page-item'">
+                    <a th:text="${page}" class="page-link" th:href="@{/articles(page=${page})}"></a>
+                </li>
+                <li th:class="${currentPage == pages.get(pages.size()-1)} ? 'page-item disabled' : 'page-item'">
+                    <a class="page-link" th:href="@{/articles(page=${currentPage+1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </main>
 
