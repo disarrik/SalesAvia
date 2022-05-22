@@ -1,5 +1,6 @@
 package ru.disarra.salesavia.routerservice.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.disarra.salesavia.routerservice.node.Airport;
 import ru.disarra.salesavia.routerservice.repository.AirportRepository;
@@ -8,6 +9,7 @@ import ru.disarra.salesavia.routerservice.repository.AirportRepository;
 public class AirportServiceImpl implements AirportService{
     private final AirportRepository airportRepository;
 
+    @Autowired
     public AirportServiceImpl(AirportRepository airportRepository) {
         this.airportRepository = airportRepository;
     }
