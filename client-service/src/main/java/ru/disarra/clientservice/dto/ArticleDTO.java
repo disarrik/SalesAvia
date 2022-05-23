@@ -63,4 +63,17 @@ public class ArticleDTO {
     public ZonedDateTime getPosted() {
         return posted;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticleDTO that = (ArticleDTO) o;
+        return Objects.equals(title, that.title) && Objects.equals(shortDescription, that.shortDescription) && Objects.equals(content, that.content) && Objects.equals(author, that.author) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(posted, that.posted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, shortDescription, content, author, imageUrl, posted);
+    }
 }

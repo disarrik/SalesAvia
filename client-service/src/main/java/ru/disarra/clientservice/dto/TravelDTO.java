@@ -1,9 +1,11 @@
 package ru.disarra.clientservice.dto;
 
+import java.util.Objects;
+
 public class TravelDTO {
-    private String price;
-    private String arrival;
-    private String departure;
+    private final String price;
+    private final String arrival;
+    private final String departure;
 
     public TravelDTO(String price, String arrival, String departure) {
         this.price = price;
@@ -11,39 +13,28 @@ public class TravelDTO {
         this.departure = departure;
     }
 
-    public TravelDTO() {
-    }
-
     public String getPrice() {
         return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getArrival() {
         return arrival;
     }
 
-    public void setArrival(String arrival) {
-        this.arrival = arrival;
-    }
-
     public String getDeparture() {
         return departure;
     }
 
-    public void setDeparture(String departure) {
-        this.departure = departure;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TravelDTO travelDTO = (TravelDTO) o;
+        return Objects.equals(price, travelDTO.price) && Objects.equals(arrival, travelDTO.arrival) && Objects.equals(departure, travelDTO.departure);
     }
 
     @Override
-    public String toString() {
-        return "TravelDTO{" +
-                "price='" + price + '\'' +
-                ", arrival='" + arrival + '\'' +
-                ", departure='" + departure + '\'' +
-                '}';
+    public int hashCode() {
+        return Objects.hash(price, arrival, departure);
     }
 }

@@ -55,4 +55,17 @@ public class ArticleWithoutContentDTO {
     public ZonedDateTime getPosted() {
         return posted;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticleWithoutContentDTO that = (ArticleWithoutContentDTO) o;
+        return Objects.equals(title, that.title) && Objects.equals(shortDescription, that.shortDescription) && Objects.equals(author, that.author) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(posted, that.posted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, shortDescription, author, imageUrl, posted);
+    }
 }

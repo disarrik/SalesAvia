@@ -1,11 +1,12 @@
 package ru.disarra.clientservice.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RouteDTO {
-    private List<AirportDTO> airports;
-    private List<TravelDTO> travels;
-    private int price;
+    private final List<AirportDTO> airports;
+    private final List<TravelDTO> travels;
+    private final int price;
 
     public RouteDTO(List<AirportDTO> airports, List<TravelDTO> travels, int price) {
         this.airports = airports;
@@ -13,39 +14,29 @@ public class RouteDTO {
         this.price = price;
     }
 
-    public RouteDTO() {
-    }
-
     public List<AirportDTO> getAirports() {
         return airports;
-    }
-
-    public void setAirports(List<AirportDTO> airports) {
-        this.airports = airports;
     }
 
     public List<TravelDTO> getTravels() {
         return travels;
     }
 
-    public void setTravels(List<TravelDTO> travels) {
-        this.travels = travels;
-    }
-
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RouteDTO routeDTO = (RouteDTO) o;
+        return price == routeDTO.price && Objects.equals(airports, routeDTO.airports) && Objects.equals(travels, routeDTO.travels);
     }
 
     @Override
-    public String toString() {
-        return "RouteDTO{" +
-                "airports=" + airports +
-                ", travels=" + travels +
-                '}';
+    public int hashCode() {
+        return Objects.hash(airports, travels, price);
     }
 }
 

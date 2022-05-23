@@ -2,6 +2,8 @@ package ru.disarra.clientservice.dto;
 
 import ru.disarra.clientservice.entity.Author;
 
+import java.util.Objects;
+
 public class AuthorDTO {
     private final String name;
     private final String surname;
@@ -24,5 +26,18 @@ public class AuthorDTO {
 
     public String getSurname() {
         return surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorDTO authorDTO = (AuthorDTO) o;
+        return Objects.equals(name, authorDTO.name) && Objects.equals(surname, authorDTO.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname);
     }
 }
