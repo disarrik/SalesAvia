@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(
+        name = "article",
         uniqueConstraints = @UniqueConstraint(columnNames = "title")
 )
 public class Article{
@@ -47,7 +48,7 @@ public class Article{
     }
 
     public String getShortDescription() {
-        return null;
+        return shortDescription;
     }
 
     public void setTitle(String title) {

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.disarra.clientservice.dto.ArticleDTO;
 import ru.disarra.clientservice.dto.ArticleWithoutContentDTO;
+import ru.disarra.clientservice.entity.Article;
 import ru.disarra.clientservice.exception.ArticleNotFoundException;
 import ru.disarra.clientservice.repository.ArticleRepository;
 
@@ -20,16 +21,18 @@ public class ArticleService {
     }
 
     public Page<ArticleWithoutContentDTO> getPage(int pageNum, int itemsOnPage) {
-        return articleRepository.findAllProjectedBy(
+        return articleRepository.findAll(
                 PageRequest.of(
                         pageNum,
                         itemsOnPage,
                         Sort.by("posted"))
-        );
+        ).map(ArticleWithoutContentDTO::of);
     }
 
     public ArticleDTO getByTitle(String title) throws ArticleNotFoundException {
-        return articleRepository.findByTitle(title)
-                .orElseThrow(ArticleNotFoundException::new);
+        return ArticleDTO.of(
+                articleRepository.findByTitle(title)
+                .orElseThrow(ArticleNotFoundException::new)
+        );
     }
 }

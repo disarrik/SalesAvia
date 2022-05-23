@@ -12,6 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
-    Page<ArticleWithoutContentDTO> findAllProjectedBy(Pageable pageable);
-    Optional<ArticleDTO> findByTitle(String title);
+    Page<Article> findAllProjectedBy(Pageable pageable);
+    Optional<Article> findByTitle(String title);
 }
