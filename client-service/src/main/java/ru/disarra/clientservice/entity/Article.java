@@ -35,6 +35,19 @@ public class Article{
     @NotNull
     private ZonedDateTime posted;
 
+    public Article(String title, String shortDescription, String content, Author author, String imageUrl, ZonedDateTime posted) {
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.content = content;
+        this.author = author;
+        this.imageUrl = imageUrl;
+        this.posted = posted;
+    }
+
+    public Article() {
+
+    }
+
     public Long getId() {
         return id;
     }

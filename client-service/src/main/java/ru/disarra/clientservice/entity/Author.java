@@ -12,14 +12,15 @@ public class Author {
 
     private String surname;
 
-    public Author(Long id, String name, String surname) {
-        this.id = id;
+    public Author(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
     public Author() {
+
     }
+
 
     public Long getId() {
         return id;
