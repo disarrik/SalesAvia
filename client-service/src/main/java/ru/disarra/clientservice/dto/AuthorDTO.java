@@ -1,5 +1,7 @@
 package ru.disarra.clientservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.disarra.clientservice.entity.Author;
 
 import java.util.Objects;
@@ -8,7 +10,10 @@ public class AuthorDTO {
     private final String name;
     private final String surname;
 
-    public AuthorDTO(String name, String surname) {
+    @JsonCreator
+    public AuthorDTO(
+            @JsonProperty("name") String name,
+            @JsonProperty("surname") String surname) {
         this.name = name;
         this.surname = surname;
     }

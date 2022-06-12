@@ -1,5 +1,8 @@
 package ru.disarra.clientservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -8,11 +11,16 @@ public class RouteDTO {
     private final List<TravelDTO> travels;
     private final int price;
 
-    public RouteDTO(List<AirportDTO> airports, List<TravelDTO> travels, int price) {
+    @JsonCreator
+    public RouteDTO(
+            @JsonProperty("airports") List<AirportDTO> airports,
+            @JsonProperty("travels") List<TravelDTO> travels,
+            @JsonProperty("price") int price) {
         this.airports = airports;
         this.travels = travels;
         this.price = price;
     }
+
 
     public List<AirportDTO> getAirports() {
         return airports;

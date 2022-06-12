@@ -1,7 +1,8 @@
 package ru.disarra.clientservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.disarra.clientservice.entity.Article;
-import ru.disarra.clientservice.entity.Author;
 
 import java.net.URL;
 import java.time.ZonedDateTime;
@@ -14,11 +15,12 @@ public class ArticleWithoutContentDTO {
     private final String imageUrl;
     private final ZonedDateTime posted;
 
-    public ArticleWithoutContentDTO(String title,
-                                    String shortDescription,
-                                    AuthorDTO author,
-                                    String imageUrl,
-                                    ZonedDateTime posted) {
+    @JsonCreator
+    public ArticleWithoutContentDTO(@JsonProperty("title") String title,
+                                    @JsonProperty("shortDescription") String shortDescription,
+                                    @JsonProperty("author") AuthorDTO author,
+                                    @JsonProperty("imageUrl") String imageUrl,
+                                    @JsonProperty("posted") ZonedDateTime posted) {
         this.title = title;
         this.shortDescription = shortDescription;
         this.author = author;

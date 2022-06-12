@@ -1,12 +1,18 @@
 package ru.disarra.clientservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class AirportDTO {
     private final String city;
     private final String name;
 
-    public AirportDTO(String city, String name) {
+    @JsonCreator
+    public AirportDTO(
+            @JsonProperty("city") String city,
+            @JsonProperty("name") String name) {
         this.city = city;
         this.name = name;
     }

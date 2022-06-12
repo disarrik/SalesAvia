@@ -1,5 +1,8 @@
 package ru.disarra.clientservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class TravelDTO {
@@ -7,7 +10,11 @@ public class TravelDTO {
     private final String arrival;
     private final String departure;
 
-    public TravelDTO(String price, String arrival, String departure) {
+    @JsonCreator
+    public TravelDTO(
+            @JsonProperty("price") String price,
+            @JsonProperty("arrival") String arrival,
+            @JsonProperty("departure") String departure) {
         this.price = price;
         this.arrival = arrival;
         this.departure = departure;
