@@ -20,6 +20,13 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
+    /**
+     * По номеру стрницы и кол-ву элемнетов на старнице возвращает объект страницы
+     * @param pageNum Номер страницы (начинается с 0)
+     * @param itemsOnPage Кол-во элементов на странице
+     * @return Контейнер из ДТО статей без контента
+     * @throws IllegalArgumentException Если pageNum < 0 или itemsOnPage < 1
+     */
     public Page<ArticleWithoutContentDTO> getPage(int pageNum, int itemsOnPage) {
         return articleRepository.findAll(
                 PageRequest.of(
@@ -29,6 +36,12 @@ public class ArticleService {
         ).map(ArticleWithoutContentDTO::of);
     }
 
+    /**
+     * Возвращает статью по ее заголовку
+     * @param title заголовок статьи
+     * @return ДТО статьи
+     * @throws ArticleNotFoundException Если статьи с таким заголовком нет в базе данных
+     */
     public ArticleDTO getByTitle(String title) throws ArticleNotFoundException {
         return ArticleDTO.of(
                 articleRepository.findByTitle(title)

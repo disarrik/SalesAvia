@@ -6,9 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import ru.disarra.clientservice.dto.ArticleDTO;
 import ru.disarra.clientservice.dto.ArticleWithoutContentDTO;
 import ru.disarra.clientservice.entity.Article;
@@ -63,7 +61,7 @@ class ArticleServiceTest {
         ArticleService articleService= new ArticleService(articleRepository);
 
         //when
-        Page<ArticleWithoutContentDTO> result = articleService.getPage(1, 3);
+        Page<ArticleWithoutContentDTO> result = articleService.getPage(0, articles.size());
 
         //then
         Assertions.assertEquals(
@@ -76,18 +74,18 @@ class ArticleServiceTest {
     @Test
     void getByTitleSuccessTest() {
         //given
-        Optional<Article> article = Optional.of(articles.get(0));
+        Article article = articles.get(0);
         Mockito
-                .when(articleRepository.findByTitle(any(String.class)))
-                .thenReturn(article);
+                .when(articleRepository.findByTitle(Mockito.eq(article.getTitle())))
+                .thenReturn(Optional.of(article));
         ArticleService articleService= new ArticleService(articleRepository);
 
         //when
-        ArticleDTO result = articleService.getByTitle("any");
+        ArticleDTO result = articleService.getByTitle(article.getTitle());
 
         //then
         Assertions.assertEquals(
-                ArticleDTO.of(article.get()),
+                ArticleDTO.of(article),
                 result
         );
     }
@@ -95,16 +93,36 @@ class ArticleServiceTest {
     @Test
     void getByTitleFailureTest() {
         //given
-        Optional<Article> article = Optional.of(articles.get(0));
+        String wrongTitle = "fjhgjfdhgsjfhgjhdsg";
         Mockito
-                .when(articleRepository.findByTitle(any(String.class)))
+                .when(articleRepository.findByTitle(Mockito.eq(wrongTitle)))
                 .thenThrow(ArticleNotFoundException.class);
         ArticleService articleService= new ArticleService(articleRepository);
 
         //when then
         Assertions.assertThrows(
                 ArticleNotFoundException.class,
-                () -> articleService.getByTitle("any")
+                () -> articleService.getByTitle(wrongTitle)
         );
+    }
+
+    @Test
+    void getNegativePageTest() {
+        //given
+        ArticleService articleService= new ArticleService(articleRepository);
+
+        //when then
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> articleService.getPage(-1, 1));
+    }
+
+    @Test
+    void getNegativeItemsAmountTest() {
+        //given
+        ArticleService articleService= new ArticleService(articleRepository);
+
+        //when then
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> articleService.getPage(1, 0));
     }
 }
