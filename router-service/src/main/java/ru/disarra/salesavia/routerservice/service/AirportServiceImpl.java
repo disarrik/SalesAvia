@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.disarra.salesavia.routerservice.node.Airport;
 import ru.disarra.salesavia.routerservice.repository.AirportRepository;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class AirportServiceImpl implements AirportService{
     private final AirportRepository airportRepository;
@@ -19,5 +22,14 @@ public class AirportServiceImpl implements AirportService{
         airportRepository.save(
                 new Airport(name, city)
         );
+    }
+
+    @Override
+    public Set<String> getAirportsCities() {
+        Set<String> cities = new HashSet<>();
+        airportRepository.findAll().forEach(
+                a -> cities.add(a.getCity())
+        );
+        return cities;
     }
 }

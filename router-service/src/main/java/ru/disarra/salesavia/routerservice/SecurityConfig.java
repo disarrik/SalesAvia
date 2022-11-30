@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/route").permitAll()
                     .antMatchers("/actuator/*").permitAll()
+                    .antMatchers("/city").permitAll()
                     .anyRequest().hasRole("ADMIN")
                     .and()
                 .httpBasic();
